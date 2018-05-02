@@ -1,2 +1,4 @@
-# debugappupdater
-android debug app update tool
+# 测试版app更新工具
+# 用途
+开发人员每天打包给测试，自动发包的程序。
+
