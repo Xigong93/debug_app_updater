@@ -1,0 +1,12 @@
+app:
+  project_path: ../ #app工程路径
+  main_module:  app #app主module名称(名称和路径需要保持一致)
+   # 更新描述前缀,会添加 在更新描述之前
+  update_desc_prefix: "饿了么更新了!\n更新描述:\n"
+pgyer:
+  api_key: 123456
+  app_key: 123456
+  u_key: 123456
+
+dingding:
+  access_token: abcd

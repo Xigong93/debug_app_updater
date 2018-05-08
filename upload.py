@@ -17,13 +17,17 @@ class Configer:
 
     def __init__(self, file):
         assert file and os.path.exists(file)
-        self.config = yaml.load(file)
+
+        with open(file, encoding='utf-8') as fp:
+            self.config = yaml.load(fp)
+
         _app = self.config.get('app')
         assert _app
         self.app_project_path = _app.get('project_path')
         self.app_main_module = _app.get('main_module')
         self.update_desc_prefix = _app.get('update_desc_prefix')
         assert self.app_project_path and os.path.exists(self.app_project_path) and self.app_main_module
+
         _pgyer = self.config.get('pgyer')
         assert _pgyer
         self.pgyer_api_key = _pgyer.get('api_key')
@@ -67,7 +71,7 @@ class Giter:
         assert path and os.path.exists(path)
         cwd = os.getcwd()
         os.chdir(path)
-        _shell = "git log --since {since_time_stamp} --pretty=%s".format(since_time_stamp=since_time_stamp)
+        _shell = "git log --since {time_stamp} --pretty=%s".format(time_stamp=since_time_stamp)
         result = subprocess.check_output(_shell, encoding='utf-8')
         os.chdir(cwd)
         return str(result).strip()
@@ -146,13 +150,13 @@ class Gradle:
 
     def find_apk(self):
         """查找apk文件"""
-        p = os.path.join(self.main_module_path, 'build')
-        for root, paths, files in os.walk(p):
+        top = os.path.join(self.main_module_path, 'build')
+        for pwd, paths, files in os.walk(top):
             for file in files:
                 if str(file).endswith(".apk"):
-                    return os.path.join(root, file)
+                    return os.path.join(pwd, file)
 
-        raise FileNotFoundError("在{path}没有找到apk文件".format(path=p))
+        raise FileNotFoundError("在{path}没有找到apk文件".format(path=top))
 
 
 def upload():
