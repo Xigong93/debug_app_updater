@@ -175,7 +175,7 @@ def upload():
     print('- upload apk file')
     pgyer.upload(file=gradle.find_apk(), update_desc=update_desc)
 
-    print('` send dingding message')
+    print('- send dingding message')
     DingDingRobot(configer.dingding_access_token).send_message(configer.update_desc_prefix + update_desc.strip())
 
 
