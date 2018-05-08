@@ -22,6 +22,7 @@ class Configer:
         assert _app
         self.app_project_path = _app.get('project_path')
         self.app_main_module = _app.get('main_module')
+        self.update_desc_prefix = _app.get('update_desc_prefix')
         assert self.app_project_path and os.path.exists(self.app_project_path) and self.app_main_module
         _pgyer = self.config.get('pgyer')
         assert _pgyer
@@ -44,7 +45,8 @@ class DingDingRobot:
     def send_message(self, content):
         assert content
         data = {"msgtype": "text", "text": {"content": content}}
-        res = requests.post(f'https://oapi.dingtalk.com/robot/send?access_token={self.access_token}', json=data)
+        res = requests.post('https://oapi.dingtalk.com/robot/send?access_token={token}'.format(token=self.access_token),
+                            json=data)
         res.raise_for_status()
         result = res.json()
         print(result)
@@ -65,7 +67,7 @@ class Giter:
         assert path and os.path.exists(path)
         cwd = os.getcwd()
         os.chdir(path)
-        _shell = f"git log --since {since_time_stamp} --pretty=%s"
+        _shell = "git log --since {since_time_stamp} --pretty=%s".format(since_time_stamp=since_time_stamp)
         result = subprocess.check_output(_shell, encoding='utf-8')
         os.chdir(cwd)
         return str(result).strip()
@@ -123,7 +125,6 @@ class Pgyer:
         result = response.json()
         print(result)
         assert result.get('code') == 0, "上传app失败 %>_<%{}"
-        # send_dingding_msg(update_desc.strip())
         print('上传app成功 O(∩_∩)O')
 
 
@@ -151,27 +152,31 @@ class Gradle:
                 if str(file).endswith(".apk"):
                     return os.path.join(root, file)
 
-        raise FileNotFoundError(f"在{p}没有找到apk文件")
+        raise FileNotFoundError("在{path}没有找到apk文件".format(path=p))
 
 
 def upload():
-    print('upload debug app start ')
+    print('- read config')
     configer = Configer('config.yml')
+
+    print('- start build app')
     gradle = Gradle(configer.app_project_path, configer.app_main_module)
     gradle.build()
+
+    print('- get last update time stamp')
     pgyer = Pgyer(configer.pgyer_api_key, configer.pgyer_app_key, configer.pgyer_u_key)
     last_update_time = pgyer.get_last_update_time()
+
+    print('- get git commit logs')
     update_desc = Giter(configer.app_project_path).get_commit_logs(last_update_time)
     if not update_desc:
         update_desc = input('请输入更新描述:\n')
+
+    print('- upload apk file')
     pgyer.upload(file=gradle.find_apk(), update_desc=update_desc)
 
-    MESSAGE_TEMP = '''$app_name更新了!
-        更新描述:
-        $content
-        下载链接 $download_url'''
-
-    DingDingRobot(configer.dingding_access_token).send_message(MESSAGE_TEMP.replace('$content', update_desc.strip()))
+    print('` send dingding message')
+    DingDingRobot(configer.dingding_access_token).send_message(configer.update_desc_prefix + update_desc.strip())
 
 
 if __name__ == '__main__':
