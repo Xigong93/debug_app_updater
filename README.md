@@ -12,5 +12,5 @@
 
 
 我最近在研究android 的持续集成，jenkins ,docker ,gradle 等技术，
-有兴趣的朋友，可以找我沟通，qq 72p368896,email pokercc@sina.com
+有兴趣的朋友，可以找我沟通，qq 729368896,email pokercc@sina.com
 
