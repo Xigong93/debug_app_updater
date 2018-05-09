@@ -4,9 +4,9 @@ app:
    # 更新描述前缀,会添加 在更新描述之前
   update_desc_prefix: "饿了么更新了!\n更新描述:\n"
 pgyer:
-  api_key: 123456
-  app_key: 123456
-  u_key: 123456
+  api_key: "123456"
+  app_key: "123456"
+  u_key: "123456"
 
 dingding:
   access_token: abcd
