@@ -60,21 +60,23 @@ class DingDingRobot:
 
 class Giter:
 
-    def get_commit_logs(path, since_time_stamp):
+    def get_commit_logs(self, path, since_time_stamp):
         """
 
         :param path: 操作目录
-        :param since_time_stamp: 起始时机戳
+        :param since_time_stamp: 起始时间戳
         :return:
         """
         # assert isinstance(int, since_time_stamp)
         assert path and os.path.exists(path)
         cwd = os.getcwd()
         os.chdir(path)
-        _shell = "git log --since {time_stamp} --pretty=%s".format(time_stamp=since_time_stamp)
-        result = subprocess.check_output(_shell, encoding='utf-8')
-        os.chdir(cwd)
-        return str(result).strip()
+        try:
+            _shell = r"git log --since {time_stamp} --pretty=%s".format(time_stamp=since_time_stamp)
+            result = subprocess.check_output(_shell, encoding='utf-8', shell=True)
+        finally:
+            os.chdir(cwd)
+        return result and str(result).strip()
 
 
 class Pgyer:
