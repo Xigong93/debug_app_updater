@@ -5,7 +5,7 @@ python:
   - ”3.6“
   - ”3.7“
 
-before_install:
+install:
   - pip3 install pipenv
   - pipenv install
 
