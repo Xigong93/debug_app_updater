@@ -16,7 +16,7 @@ from requests_toolbelt import MultipartEncoderMonitor
 class Configer:
 
     def __init__(self, file):
-        assert file and os.path.exists(file)
+        assert file and os.path.exists(file), 'config.yml 配置文件不存在'
 
         with open(file, encoding='utf-8') as fp:
             self.config = yaml.load(fp)
@@ -145,8 +145,8 @@ class Gradle:
     def build(self):
         cwd = os.getcwd()
         os.chdir(self.project_path)
-        os.chmod(path=os.path.join(self.project_path, 'gradlew'), module=777)
-        command = 'gradlew {module}:clean {module}:assembleDebug'.format(module=self.main_module)
+        os.chmod(path=os.path.join(self.project_path, 'gradlew'), mode=777)
+        command = './gradlew {module}:clean {module}:assembleDebug'.format(module=self.main_module)
         assert os.system(command) == 0, "build fail"
         os.chdir(cwd)
 

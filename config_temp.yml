@@ -1,0 +1,15 @@
+# 配置文件模板
+app:
+  #app工程路径
+  project_path: ../../
+  #app主module名称(名称和路径需要保持一致)
+  main_module: app
+   # 更新描述前缀,会添加 在更新描述之前
+  update_desc_prefix: "饿了么更新了!\n更新描述:\n"
+pgyer:
+  api_key: xxxxxxxxxxxxxxxxxxxxxx
+  app_key: xxxxxxxxxxxxxxxxxxxxxx
+  u_key: xxxxxxxxxxxxxxxxxxxxxx
+
+dingding:
+  access_token: xxxxxxxxxxxxxxxxxxxxxx

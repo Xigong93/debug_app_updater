@@ -15,7 +15,7 @@
 
 ## 怎么使用?
 ### 简单步骤
-* 把整个Python工程下载，放到自己的安卓项目中
+* 把整个Python工程下载或使用git submodule 方式集成到自己的安卓项目中
 * 修改config.yml以适应自己的项目
 * 执行start.sh 调试和使用
 
@@ -24,7 +24,12 @@
 
 欢迎大家批评指正
 
-
+### 工程文件介绍
+* tests 单元测试
+* Pipfile和Pipfile.lock python 虚拟环境的配置文件，类似java的依赖配置文件 pom.xml 或者是build.gradle
+* start.sh 启动脚本
+* upload.py 主要的脚本
+* config_temp.yml 配置文件的模板
 
 
 
