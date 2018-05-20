@@ -16,7 +16,7 @@
 ## 怎么使用?
 ### 简单步骤
 * 把整个Python工程下载或使用git submodule 方式集成到自己的安卓项目中
-* 修改config.yml以适应自己的项目
+* 复制config_temp.yml 文件命名为config.yml,并修改其中的参数配置，以适应自己的项目(注意config.yml 被添加到了.gitignore 文件中)
 * 执行start.sh 调试和使用
 
 ### 高级玩法
