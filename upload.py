@@ -145,7 +145,7 @@ class Gradle:
     def build(self):
         cwd = os.getcwd()
         os.chdir(self.project_path)
-        os.chmod(path=os.path.join(self.project_path, 'gradlew'), mode=777)
+        os.chmod('gradlew', mode=777)
         command = './gradlew {module}:clean {module}:assembleDebug'.format(module=self.main_module)
         assert os.system(command) == 0, "build fail"
         os.chdir(cwd)
