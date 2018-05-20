@@ -1,4 +1,6 @@
 # encoding=utf-8
+import platform
+
 import yaml
 
 __author__ = 'pokercc'
@@ -145,7 +147,8 @@ class Gradle:
     def build(self):
         cwd = os.getcwd()
         os.chdir(self.project_path)
-        os.chmod('gradlew', mode=777)
+        # os.chmod('gradlew', mode=777)
+        os.system('chmod +x gradlew')
         command = './gradlew {module}:clean {module}:assembleDebug'.format(module=self.main_module)
         assert os.system(command) == 0, "build fail"
         os.chdir(cwd)
