@@ -172,7 +172,7 @@ def upload():
     configer = Configer('config.yml')
 
     print('- start build app')
-    gradle = Gradle(configer.app_project_path, configer.app_main_module)
+    gradle = Gradle(configer.app_project_path, configer.app_main_module, configer.build_command)
     gradle.build()
 
     print('- get last update time stamp')
