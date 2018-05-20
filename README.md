@@ -15,7 +15,7 @@
 
 ## 怎么使用?
 ### 简单步骤
-* 把整个Python工程拷贝或者是clone到自己的android项目里，建议使用git submodule 的方式
+* 把整个Python工程下载，放到自己的安卓项目中
 * 修改config.yml以适应自己的项目
 * 执行start.sh 调试和使用
 
