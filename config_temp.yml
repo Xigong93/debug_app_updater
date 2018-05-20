@@ -4,8 +4,10 @@ app:
   project_path: ../../
   #app主module名称(名称和路径需要保持一致)
   main_module: app
-   # 更新描述前缀,会添加 在更新描述之前
+  #更新描述前缀,会添加 在更新描述之前
   update_desc_prefix: "饿了么更新了!\n更新描述:\n"
+  #gradle 打包脚本
+  build_command: './gradlew app:clean app:assembleDebug'
 pgyer:
   api_key: xxxxxxxxxxxxxxxxxxxxxx
   app_key: xxxxxxxxxxxxxxxxxxxxxx

@@ -28,7 +28,9 @@ class Configer:
         self.app_project_path = _app.get('project_path')
         self.app_main_module = _app.get('main_module')
         self.update_desc_prefix = _app.get('update_desc_prefix')
-        assert self.app_project_path and os.path.exists(self.app_project_path) and self.app_main_module
+        self.build_command = _app.get('build_command')
+        assert self.app_project_path and os.path.exists(self.app_project_path)
+        assert self.app_main_module and self.build_command
 
         _pgyer = self.config.get('pgyer')
         assert _pgyer
@@ -138,19 +140,20 @@ class Pgyer:
 
 class Gradle:
 
-    def __init__(self, project_path=os.curdir, main_module='app'):
+    def __init__(self, project_path, main_module, build_command):
         assert project_path and os.path.exists(project_path)
+        assert build_command
         self.project_path = project_path
         self.main_module = main_module
         self.main_module_path = os.path.join(project_path, main_module)
+        self.build_command = build_command;
 
     def build(self):
         cwd = os.getcwd()
         os.chdir(self.project_path)
         # os.chmod('gradlew', mode=777)
         os.system('chmod +x gradlew')
-        command = './gradlew {module}:clean {module}:assembleDebug'.format(module=self.main_module)
-        assert os.system(command) == 0, "build fail"
+        assert os.system(self.build_command) == 0, "build fail"
         os.chdir(cwd)
 
     def find_apk(self):
