@@ -7,11 +7,17 @@ app:
   #更新描述前缀,会添加 在更新描述之前
   update_desc_prefix: "饿了么更新了!\n更新描述:\n"
   #gradle 打包脚本
-  build_command: './gradlew app:clean app:assembleDebug'
+  build_command: 'gradlew app:clean app:assembleDebug'
+# pgyer 的api配置
 pgyer:
+  # Api Key
   api_key: xxxxxxxxxxxxxxxxxxxxxx
+  # App Key
   app_key: xxxxxxxxxxxxxxxxxxxxxx
+  # User Key
   u_key: xxxxxxxxxxxxxxxxxxxxxx
 
+# 钉钉
 dingding:
+  # 群机器人 token
   access_token: xxxxxxxxxxxxxxxxxxxxxx

@@ -134,7 +134,7 @@ class Pgyer:
         response.raise_for_status()
         result = response.json()
         print(result)
-        assert result.get('code') == 0, "上传app失败 %>_<%{}"
+        assert result.get('code') == 0, "上传app失败 %>_<%"
         print('上传app成功 O(∩_∩)O')
 
 
@@ -180,7 +180,7 @@ def upload():
     last_update_time = pgyer.get_last_update_time()
 
     print('- get git commit logs')
-    update_desc = Giter(configer.app_project_path).get_commit_logs(last_update_time)
+    update_desc = Giter().get_commit_logs(configer.app_project_path,last_update_time)
     if not update_desc:
         update_desc = input('请输入更新描述:\n')
 
