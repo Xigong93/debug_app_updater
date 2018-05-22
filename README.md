@@ -40,6 +40,9 @@
 ### 高级玩法
 请参考这个demo https://github.com/pokercc/debug_app_updater_demo
 
+### 其他
+* [pgyer apikey 的获取](https://www.pgyer.com/doc)
+* [dingding 机器人access  token 的获取](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.h2WGBL&treeId=257&articleId=105735&docType=1)
 
 我最近在研究android 的持续集成，jenkins ,docker ,gradle 等技术，
 有兴趣的朋友，可以一起沟通探讨，qq 729368896,email pokercc@sina.com
